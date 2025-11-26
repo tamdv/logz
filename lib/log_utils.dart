@@ -96,8 +96,8 @@ class LogUtils {
 
         final fileDate = DateTime(year, month, day);
 
-        // Delete if file is older than 30 days
-        if (now.difference(fileDate).inDays > 30) {
+        // Delete if file is older than 7 days
+        if (now.difference(fileDate).inDays > 7) {
           await File(file.path).delete();
         }
       }
