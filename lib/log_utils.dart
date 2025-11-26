@@ -47,7 +47,10 @@ class LogUtils {
       if (_cacheDirectoryPath == null) {
         await _initializeCacheDirectory(); // Call initialization if not done yet
       }
-      final logFiles = Directory(_cacheDirectoryPath ?? '').listSync().where((file) => file is File && file.path.contains(logFilePrefix)).toList();
+      final logFiles = Directory(_cacheDirectoryPath ?? '')
+          .listSync()
+          .where((file) => file is File && file.path.contains(logFilePrefix))
+          .toList();
 
       if (logFiles.isEmpty) {
         throw Exception("No log files found to zip.");
@@ -80,14 +83,22 @@ class LogUtils {
     }
     final directory = Directory(_cacheDirectoryPath ?? '');
 
-    final files = await directory.list().where((file) => file.path.contains(logFilePrefix) && file.path.endsWith('.txt')).toList();
+    final files = await directory
+        .list()
+        .where(
+          (file) =>
+              file.path.contains(logFilePrefix) && file.path.endsWith('.txt'),
+        )
+        .toList();
 
     final now = DateTime.now();
 
     for (var file in files) {
       final fileName = file.path.split('/').last;
       // final match = RegExp(r'onelinksdk-(\d{2})-(\d{2})-(\d{4})\.txt').firstMatch(fileName);
-      final match = RegExp('${RegExp.escape(logFilePrefix)}(\\d{2})-(\\d{2})-(\\d{4})\\.txt').firstMatch(fileName);
+      final match = RegExp(
+        '${RegExp.escape(logFilePrefix)}(\\d{2})-(\\d{2})-(\\d{4})\\.txt',
+      ).firstMatch(fileName);
 
       if (match != null) {
         final day = int.parse(match.group(1)!);
@@ -157,7 +168,8 @@ App VersionCode    : ${packageInfo.buildNumber}
     }
 
     final now = DateTime.now();
-    final logFilePath = '$_cacheDirectoryPath/$logFilePrefix-${now.day.toString().padLeft(2, '0')}-${now.month.toString().padLeft(2, '0')}-${now.year}.txt';
+    final logFilePath =
+        '$_cacheDirectoryPath/$logFilePrefix-${now.day.toString().padLeft(2, '0')}-${now.month.toString().padLeft(2, '0')}-${now.year}.txt';
 
     final serializedData = _serializeData(data);
     final timestamp = _getFormattedTimestamp();

@@ -12,7 +12,11 @@ class LogZ {
   /// [printLogs] indicates whether to print logs to console, default is true. \
   /// [zipPassword] is the password for the zipped log files. Use this password to unzip logs.zip file. \
   /// [logFilePrefix] is the prefix for log file names. For example, if set to 'appLog', log files will be named like 'appLog-12-31-2024.txt'.
-  factory LogZ({required String zipPassword, required String logFilePrefix, bool printLogs = true}) {
+  factory LogZ({
+    required String zipPassword,
+    required String logFilePrefix,
+    bool printLogs = true,
+  }) {
     LogUtils.shared.zipPassword = zipPassword;
     LogUtils.shared.logFilePrefix = logFilePrefix;
     _instance._isPrint = printLogs;
