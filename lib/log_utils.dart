@@ -65,7 +65,7 @@ class LogUtils {
       final zipData = zipEncoder.encode(archive);
 
       final zipFilePath = '$_cacheDirectoryPath/logs.zip';
-      final zipFile = File(zipFilePath)..writeAsBytesSync(zipData!);
+      final zipFile = File(zipFilePath)..writeAsBytesSync(zipData);
 
       return zipFile;
     } catch (e) {
@@ -176,9 +176,7 @@ App VersionCode    : ${packageInfo.buildNumber}
 
           await logFile.writeAsString(content, mode: FileMode.append);
         })
-        .catchError((e) {
-          print('Error writing to $logFilePath: $e');
-        });
+        .catchError((e) {});
 
     return _fileLocks[logFilePath];
   }
