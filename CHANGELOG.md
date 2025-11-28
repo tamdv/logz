@@ -6,3 +6,5 @@
 * Update version of libs
 ## 0.0.4
 * Format
+## 0.0.5
+* Update Share plus to avoid crash on iOS 26
