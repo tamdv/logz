@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:logz/log_utils.dart';
@@ -65,6 +66,9 @@ class LogZ {
   ///zip files for share
   void zipToShareLog() async {
     final file = await LogUtils.shared.zipLog();
-    Share.shareXFiles([XFile(file.path)]);
+    final box = Rect.fromLTWH(100, 100, 200, 200);
+    SharePlus.instance.share(
+      ShareParams(files: [XFile(file.path)], sharePositionOrigin: box),
+    );
   }
 }
